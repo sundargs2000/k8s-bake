@@ -1,0 +1,20 @@
+name: “Trigger Integration tests”
+on:
+  pull_request_target:
+    types: [labeled]
+    branches:
+      - master
+      - ‘releases/*’
+jobs:
+    trigger-integration-tests:
+      name: Trigger Integration tests
+      if: contains(github.event.pull_request.labels.*.name, ‘safe to run test’) #AND contains(github.event.pull_request.
+      runs-on: ubuntu-latest
+      steps:
+        - name: Check out repository
+          uses: actions/checkout@v2
+          with:
+              path: IntegrationTests
+       - name: Trigger Test run
+          run: |
+          bash ./IntegrationTests/.github/workflows/TriggerIntegrationTests.sh ${{ secrets.L2_REPO_TOKEN }} ${{ github.event.pull_request.head.sha }} ${{ github.repository }} ${{ github.event.pull_request.number }} ${{ github.event.pull_request.head.ref }} ${{ github.event.pull_request.base.ref }} ${{ secrets.L2_REPO_USER }}
