@@ -1,14 +1,14 @@
 name: 'Trigger Integration tests'
 on:
   pull_request_target:
-    types: [labeled]
+    types: [labeled, opened]
     branches:
       - master
       - 'releases/*'
 jobs:
     trigger-integration-tests:
       name: Trigger Integration tests
-      if: contains(github.event.pull_request.labels.*.name, 'safe to run test') #AND contains(github.event.pull_request.
+      if: startsWith(github.event.pull_request.head.label, github.repository_owner + ':') OR contains(github.event.pull_request.labels.*.name, 'safe to run test') #AND contains(github.event.pull_request.
       runs-on: ubuntu-latest
       steps:
         - name: print event object
