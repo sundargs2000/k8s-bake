@@ -1,6 +1,7 @@
 # Kubernetes bake action
-Use this action to bake manifest file to be used for deployments using helm, kustomize or kompose testing fork PR 2 after 1st merge
-
+Use this action to bake manifest file to be used for deployments using helm, kustomize or kompose testing fork PR 2 after 1st merge PR 2
+After write access tes some more
+ 
 Sets output variable 'manifestsBundle' which contains the location of the manifest bundles created by bake action
 
 #### Bake using helm
